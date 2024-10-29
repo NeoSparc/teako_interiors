@@ -1,4 +1,4 @@
-<nav class="h-32 w-full bg-[#f5f5f5] flex justify-center items-center sm:flex-col flex-row gap-2 pt-3 relative">
+<nav class="h-32 w-full bg-[#f5f5f5] flex justify-center items-center sm:flex-col flex-row gap-2 pt-3 fixed">
     <!-- Menu Button -->
     <button class="block sm:hidden absolute top-12 left-6 font-black text-xl" (click)="open()">
         <i *ngIf="navbar" class="fa-solid fa-bars"></i>
@@ -17,16 +17,16 @@
     [ngClass]="{ '-translate-x-full': navbar , 'translate-x-0': !navbar}"
 >
     <ul class="flex flex-col sm:flex-row sm:items-center justify-center sm:justify-center p-8 sm:p-0 gap-6 sm:gap-10 lg:gap-20">
-        <li  class="text-base sm:text-lg lg:text-lg bg-gray-200 sm:bg-transparent hover:bg-blue-300 hover:text-white transition-colors duration-300 rounded-lg px-4 py-2">
+        <li  class="text-base sm:text-lg lg:text-lg bg-gray-200 sm:bg-transparent cursor-pointer hover:bg-blue-300 hover:text-white transition-colors duration-300 rounded-lg px-4 py-2">
             Service
         </li>
-        <li class="text-base sm:text-lg lg:text-lg bg-gray-200 sm:bg-transparent hover:bg-blue-300 hover:text-white transition-colors duration-300 rounded-lg px-4 py-2">
+        <li class="text-base sm:text-lg lg:text-lg bg-gray-200 sm:bg-transparent cursor-pointer hover:bg-blue-300 hover:text-white transition-colors duration-300 rounded-lg px-4 py-2">
             Products
         </li>
-        <li class="text-base sm:text-lg lg:text-lg bg-gray-200 sm:bg-transparent hover:bg-blue-300 hover:text-white transition-colors duration-300 rounded-lg px-4 py-2">
+        <li class="text-base sm:text-lg lg:text-lg bg-gray-200 sm:bg-transparent cursor-pointer hover:bg-blue-300 hover:text-white transition-colors duration-300 rounded-lg px-4 py-2">
             Prize calculation
         </li>
-        <li class="text-base sm:text-lg lg:text-lg bg-gray-200 sm:bg-transparent hover:bg-blue-300 hover:text-white transition-colors duration-300 rounded-lg px-4 py-2">
+        <li class="text-base sm:text-lg lg:text-lg bg-gray-200 sm:bg-transparent cursor-pointer hover:bg-blue-300 hover:text-white transition-colors duration-300 rounded-lg px-4 py-2">
             Contact us
         </li>
     </ul>

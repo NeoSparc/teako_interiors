@@ -27,11 +27,13 @@ export class NavBarComponent implements OnInit {
   }
 
   checkScreenSize() {
-    const screenWidth = window.innerWidth;
-    if (screenWidth < 992) {
-      this.onScreenSizeLessThanLg();
-    } else if (screenWidth >= 992) {
-      this.onScreenSizeLargerThanLg();
+    if (typeof window !== 'undefined') {  
+      const screenWidth = window.innerWidth;
+      if (screenWidth < 992) {
+        this.onScreenSizeLessThanLg();
+      } else {
+        this.onScreenSizeLargerThanLg();
+      }
     }
   }
 
