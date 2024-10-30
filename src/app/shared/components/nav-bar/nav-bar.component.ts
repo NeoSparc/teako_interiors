@@ -13,6 +13,7 @@ import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 export class NavBarComponent implements OnInit {
 
   openMenuBar:boolean = false
+  closebar:boolean = false
   navbar:boolean=false
 
   ngOnInit(): void {
@@ -39,16 +40,19 @@ export class NavBarComponent implements OnInit {
 
   onScreenSizeLessThanLg() {
     this.openMenuBar = false;
+    this.closebar = false
     this.navbar = true 
   }
 
   onScreenSizeLargerThanLg() {
     this.openMenuBar = true;
+    this.closebar = false
     this.navbar = false
   }
 
   open(){
     this.openMenuBar = !this.openMenuBar
     this.navbar = !this.navbar    
+    this.closebar = !this.closebar
   }
 }

@@ -7,7 +7,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily:{
-        title: ["Nunito", "sans-serif"]
+        title: ["Nunito", "sans-serif"],
+        orbitron:["Orbitron", "sans-serif"],
+        juilius:["Julius Sans One", 'sans-serif']
       }
     },
   },

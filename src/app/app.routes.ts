@@ -3,6 +3,6 @@ import { LandingPageComponent } from './features/components/client/landing-page/
 
 export const routes: Routes = [
     {
-        path:'',component:LandingPageComponent
+        path:'',component:LandingPageComponent,loadChildren:()=> import('./features/user.routes').then((m)=>m.userRoutes)
     }
 ];
