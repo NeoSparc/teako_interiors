@@ -1,0 +1,75 @@
+<section class="py-16 px-4 bg-warm-gray-50">
+    <div class="max-w-7xl mx-auto">
+      <!-- Header Section -->
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-[#382A1E] mb-4 font-title">Custom Carpentry & Fitting Services</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Transforming spaces with precision craftsmanship and timeless wooden designs
+        </p>
+      </div>
+  
+      <!-- Main Content Grid -->
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <!-- Image Section -->
+        <div class="relative h-[300px] rounded-xl overflow-hidden shadow-2xl">
+          <img 
+            src="/images/pexels-quintingellar-313776.jpg" 
+            alt="Carpenter crafting custom furniture" 
+            class="object-cover w-full h-full"
+            onError="this.src='https://via.placeholder.com/600x500?text=Carpentry+Workshop'"
+          />
+          <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
+            <p class="text-white text-lg font-medium">Our Workshop in Action</p>
+          </div>
+        </div>
+   
+        <!-- Content Section -->
+        <div class="space-y-8">
+          <!-- Quote Section -->
+          <blockquote class="text-2xl italic font-light text-gray-700 border-l-4 border-amber-600 pl-4">
+            "Wood is universally beautiful to man. It is the most humanly intimate of all materials."
+            <footer class="text-sm font-medium text-gray-600 mt-2">- Frank Lloyd Wright</footer>
+          </blockquote>
+  
+          <!-- Services List -->
+          <div class="space-y-6">
+            <h3 class="text-2xl font-bold text-[#382A1E] font-title">Our Carpentry Services</h3>
+            <div class="grid gap-4">
+              <div class="flex items-start space-x-3">
+                <svg class="w-6 h-6 text-amber-600 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span class="text-gray-700">Custom furniture design and creation</span>
+              </div>
+              <div class="flex items-start space-x-3">
+                <svg class="w-6 h-6 text-amber-600 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span class="text-gray-700">Built-in wardrobes and storage solutions</span>
+              </div>
+              <div class="flex items-start space-x-3">
+                <svg class="w-6 h-6 text-amber-600 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span class="text-gray-700">Kitchen cabinet fitting and customization</span>
+              </div>
+              <div class="flex items-start space-x-3">
+                <svg class="w-6 h-6 text-amber-600 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span class="text-gray-700">Wooden flooring installation and restoration</span>
+              </div>
+            </div>
+          </div>
+  
+          <!-- CTA Button -->
+          <button 
+            class="mt-6 px-8 py-3 bg-[#F89F1F] text-[#382A1E] rounded-lg hover:bg-amber-700 transition-colors duration-300 shadow-lg"
+            (click)="requestQuote()"
+          >
+            Request for a call
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>

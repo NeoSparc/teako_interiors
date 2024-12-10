@@ -1,0 +1,58 @@
+<section class="py-10 px-4  mt-32">
+    <div class="max-w-7xl mx-auto">
+
+      <!-- Category Filter -->
+      <div class="flex flex-wrap justify-center gap-4 mb-8">
+        <button
+          *ngFor="let category of categories"
+          (click)="setActiveCategory(category)"
+          [class.bg-amber-600]="activeCategory() === category"
+          [class.text-white]="activeCategory() === category"
+          [class.bg-white]="activeCategory() !== category"
+          class="px-6 py-2 rounded-full shadow-md hover:shadow-lg transition-all duration-300 text-sm font-medium ring-1"
+        >
+          {{ category }}
+        </button>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        @for (product of products ; track product.id) {
+          <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+            <!-- Product Image -->
+            <div class="relative h-40 cursor-pointer" >
+              <img 
+                [src]="product.image" 
+                [alt]="product.name"
+                class="w-full h-full object-cover"
+                (error)="handleImageError($event)"
+              />
+              <div class="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-10 transition-opacity duration-300 flex items-center justify-center">
+                <span class="text-white bg-black bg-opacity-75 px-4 py-2 rounded-lg opacity-0 hover:opacity-100 transition-opacity duration-300">
+                  View Details
+                </span>
+              </div>
+            </div>
+
+            <!-- Product Info -->
+            <div class="p-6">
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="text-xl font-bold text-gray-900">{{ product.name }}</h3>
+                <span class="text-amber-600 font-semibold">${{ product.price | currency:'INR'  }}</span>
+              </div>
+              <p class="text-gray-600 text-sm mb-4">{{ product.description }}</p>
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-gray-500">{{ product.category }}</span>
+                <button 
+                  class="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors duration-300"
+                >
+                  Inquire Now
+                </button>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+
+    </div>
+  </section>

@@ -1,4 +1,6 @@
-<nav class="h-32 w-full bg-[#f5f5f5] flex justify-center items-center sm:flex-col flex-row gap-2 pt-3 fixed z-50">
+<nav
+  class="h-32 w-full flex justify-center items-center sm:flex-col flex-row gap-2 pt-3 transform transition-transform duration-300 fixed z-50 bg-gray-100"
+>
     <!-- Menu Button -->
     <button class="block sm:hidden absolute top-12 left-6 font-black text-xl" (click)="open()">
         <i *ngIf="navbar" class="fa-solid fa-bars"></i>
@@ -6,49 +8,56 @@
     </button>
 
     <!-- Logo -->
-    <div class="w-full h-20 sm:h-16 flex flex-col gap-3 items-center justify-center">
+      <div class="w-full h-20 sm:h-16 flex flex-col gap-3 items-center justify-center">
         <img src="/images/teako.png" alt="Teako Logo" class="h-full w-auto">
-        <p class="block sm:hidden font-title " style="letter-spacing: 10px;">INTERIORS</p>
+        <p class="block sm:hidden font-title" style="letter-spacing: 10px;">INTERIORS</p>
     </div>
 
     <!-- Menu Items -->
     <menu
-    class="fixed sm:static top-32 left-0 h-full sm:h-auto max-h-screen w-64 sm:w-full bg-[#f5f5f5] z-50 transform transition-transform duration-300 sm:transform-none pb-2 flex flex-col items-center font-title "
-    [ngClass]="{ '-translate-x-full': navbar , 'translate-x-0': !navbar}"
+  class="fixed sm:static top-32 left-0 h-screen  max-h-screen w-64 sm:w-full bg-white sm:bg-transparent z-50 transform transition-transform duration-300 sm:transform-none pb-2 flex flex-col items-center font-title"
+  [ngClass]="{ '-translate-x-full': navbar, 'translate-x-0': !navbar }"
 >
-    <ul class="flex flex-col sm:flex-row sm:items-center justify-center sm:justify-center p-8 sm:p-0 gap-6 sm:gap-10 lg:gap-20">
-        <li  class="text-base sm:text-lg lg:text-lg bg-gray-200 sm:bg-transparent cursor-pointer hover:bg-blue-300 hover:text-white transition-colors duration-300 rounded-lg px-4 py-2">
-            Service
-        </li>
-        <li class="text-base sm:text-lg lg:text-lg bg-gray-200 sm:bg-transparent cursor-pointer hover:bg-blue-300 hover:text-white transition-colors duration-300 rounded-lg px-4 py-2">
-            Products
-        </li>
-        <li class="text-base sm:text-lg lg:text-lg bg-gray-200 sm:bg-transparent cursor-pointer hover:bg-blue-300 hover:text-white transition-colors duration-300 rounded-lg px-4 py-2">
-            Prize calculation
-        </li>
-        <li class="text-base sm:text-lg lg:text-lg bg-gray-200 sm:bg-transparent cursor-pointer hover:bg-blue-300 hover:text-white transition-colors duration-300 rounded-lg px-4 py-2">
-            Contact us
-        </li>
-    </ul>
+  <ul class="flex flex-col sm:flex-row sm:items-center justify-center font-black  text-[#382A1E] p-8 sm:p-0 gap-6  lg:gap-10">
+    <li (click)="goToHome()" class="text-base sm:text-lg lg:text-lg bg-gray-200 sm:bg-transparent cursor-pointer hover:bg-blue-300 hover:text-white transition-colors duration-300 rounded-lg px-4 py-2">
+      Home
+    </li>
+    <li (click)="goToService()" class="text-base sm:text-lg lg:text-lg bg-gray-200 sm:bg-transparent cursor-pointer hover:bg-blue-300 hover:text-white transition-colors duration-300 rounded-lg px-4 py-2">
+      Service
+    </li>
+    <li (click)="goToProducts()" class="text-base sm:text-lg lg:text-lg bg-gray-200 sm:bg-transparent cursor-pointer hover:bg-blue-300 hover:text-white transition-colors duration-300 rounded-lg px-4 py-2">
+      Products
+    </li>
+    <li class="text-base sm:text-lg lg:text-lg bg-gray-200 sm:bg-transparent cursor-pointer hover:bg-blue-300 hover:text-white transition-colors duration-300 rounded-lg px-4 py-2">
+      Prize calculation
+    </li>
+    <li (click)="goToAboutUs()"  class="text-base sm:text-lg lg:text-lg bg-gray-200 sm:bg-transparent cursor-pointer hover:bg-blue-300 hover:text-white transition-colors duration-300 rounded-lg px-4 py-2" routerLinkActive="bg-blue-300 rounded-lg ">
+      About us
+    </li>
+    <li (click)="goToContactSection()" class="text-base sm:text-lg lg:text-lg bg-gray-200 sm:bg-transparent cursor-pointer hover:bg-blue-300 hover:text-white transition-colors duration-300 rounded-lg px-4 py-2">
+      Contact us
+    </li>
+  </ul>
 
-    <div class=" sm:hidden flex items-center justify-center flex-col gap-6 ">
-        <p class="font-title">Follow us through</p>
-        <div class="flex items-center justify-center gap-4">
-            <a href="https://www.youtube.com/" target="_blank">
-                <img src="/social media logo/facebook" alt="" class="h-8 w-8">
-            </a>
-            <a href="https://www.youtube.com/" target="_blank">
-             <img src="/social media logo/instagram" alt="" class="h-8 w-8">
-             </a>
-             <a href="https://www.youtube.com/" target="_blank">
-             <img src="/social media logo/whatsaap" alt="" class="h-8 w-8">
-             </a>
-             <a href="https://www.youtube.com/" target="_blank">
-             <img src="/social media logo/youtube" alt="" class="h-8 w-8">
-             </a>
-        </div>
-     </div>
+  <div class="sm:hidden flex items-center justify-center flex-col gap-6">
+    <p class="font-title">Follow us through</p>
+    <div class="flex items-center justify-center gap-4">
+      <a href="https://www.youtube.com/" target="_blank">
+        <img src="/social media logo/facebook" alt="" class="h-8 w-8">
+      </a>
+      <a href="https://www.youtube.com/" target="_blank">
+        <img src="/social media logo/instagram" alt="" class="h-8 w-8">
+      </a>
+      <a href="https://www.youtube.com/" target="_blank">
+        <img src="/social media logo/whatsaap" alt="" class="h-8 w-8">
+      </a>
+      <a href="https://www.youtube.com/" target="_blank">
+        <img src="/social media logo/youtube" alt="" class="h-8 w-8">
+      </a>
+    </div>
+  </div>
 </menu>
+
 
 
 
