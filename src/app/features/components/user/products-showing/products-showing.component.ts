@@ -1,15 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
-
-
-interface Product {
-  id: number;
-  name: string;
-  category: string;
-  price: number;
-  image: string;
-  description: string;
-}
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -22,7 +13,8 @@ interface Product {
   styleUrl: './products-showing.component.css'
 })
 export class ProductsShowingComponent {
-   products: Product[] = [
+  constructor(private router:Router){}
+   products: any[] = [
     {
       id: 1,
       name: 'Modern Wooden Door',
@@ -75,7 +67,7 @@ export class ProductsShowingComponent {
 
   categories = ['All', 'Doors', 'Sofas', 'Storage', 'Kitchen', 'Bedroom', 'Office'];
   activeCategory = signal<string>('All');
-  selectedProduct = signal<Product | null>(null);
+  selectedProduct = signal<any >
 
 
   setActiveCategory(category: string) {
@@ -87,5 +79,9 @@ export class ProductsShowingComponent {
   handleImageError(event: Event) {
     const img = event.target as HTMLImageElement;
     img.src = `https://via.placeholder.com/400x300?text=${encodeURIComponent(img.alt)}`;
+  }
+
+  goToSingle(){
+    this.router.navigate(['/singleview'])
   }
 }
