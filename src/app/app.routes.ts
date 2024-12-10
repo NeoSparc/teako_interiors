@@ -4,5 +4,8 @@ import { LandingPageComponent } from './features/components/user/landing-page/la
 export const routes: Routes = [
     {
         path:'',component:LandingPageComponent,loadChildren:()=> import('./features/components/user/user.routes').then((m)=>m.userRoutes)
+    },
+    {
+        path:'admin',loadChildren:()=> import('./core/auth/auth.routes').then((m)=> m.AuthRouter)
     }
 ];

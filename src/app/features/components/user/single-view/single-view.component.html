@@ -11,9 +11,9 @@
       
       <!-- Product Details -->
       <div class="space-y-4">
-        <h1 class="text-3xl font-bold text-gray-900 text-center">{{ product.name }}</h1>
+        <h1 class="text-3xl font-bold text-[#382A1E] text-center">{{ product.name }}</h1>
         
-        <div class="text-2xl font-semibold text-green-600">
+        <div class="text-2xl font-semibold text-[#F89F1F]">
           {{ product.price | currency: 'INR' }}
         </div>
         
@@ -44,10 +44,10 @@
         </div>
         
         <button 
-          class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors"
+          class="w-full bg-[#F89F1F] text-white py-3 rounded-lg hover:bg-amber-700 transition-colors"
           [disabled]="!product.availability"
         >
-          {{ product.availability ? 'Add to Cart' : 'Out of Stock' }}
+          Order now
         </button>
       </div>
     </div>
@@ -67,7 +67,7 @@
           />
           <div class="p-4">
             <h3 class="font-semibold text-lg truncate">{{ relatedProduct.name }}</h3>
-            <p class="text-green-600 font-bold">{{ relatedProduct.price | currency: 'INR' }}</p>
+            <p class="text-[#F89F1F] font-bold">{{ relatedProduct.price | currency: 'INR' }}</p>
           </div>
         </div>
       </div>
