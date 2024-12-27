@@ -1,35 +1,20 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { RouterModule } from '@angular/router';
 
-
-interface Advertisement {
-  id: number;
-  productImage: string;
-  offerRange: string;
-  mainTitle: string;
-  secondaryText: string;
-}
 
 @Component({
   selector: 'app-offers',
   standalone: true,
   imports: [
     CommonModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDialogModule
+    RouterModule
   ],
   templateUrl: './offers.component.html',
   styleUrl: './offers.component.css'
 })
 export class OffersComponent {
-  // Use signal for reactive state management
-  advertisements = signal<Advertisement[]>([
+  advertisements = signal<any[]>([
     {
       id: 1,
       productImage: 'https://via.placeholder.com/300x200',
@@ -88,10 +73,8 @@ export class OffersComponent {
     },
   ]);
 
-  constructor(private dialog: MatDialog) {}
 
-  editAd(ad: Advertisement): void {
-    // Implement edit logic
+  editAd(ad: any): void {
     console.log('Edit Ad:', ad);
   }
 
@@ -102,7 +85,6 @@ export class OffersComponent {
   }
 
   openAddAdDialog(): void {
-    // Implement add new ad dialog
     console.log('Open Add Ad Dialog');
   }
 }

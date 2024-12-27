@@ -5,6 +5,9 @@ import { UserDataComponent } from "./user-data/user-data.component";
 import { BannerComponent } from "./banner/banner.component";
 import { AllProductsComponent } from "./all-products/all-products.component";
 import { OffersComponent } from "./offers/offers.component";
+import { AddproductComponent } from "./addproduct/addproduct.component";
+import { AddofferComponent } from "./addoffer/addoffer.component";
+import { AddbannerComponent } from "./addbanner/addbanner.component";
 
 export const AdminRoutes:Routes = [
     {path:'landpage',component:LandingPageComponent,
@@ -13,7 +16,10 @@ export const AdminRoutes:Routes = [
             {path:'userData',component:UserDataComponent},
             {path:'banner',component:BannerComponent},
             {path:'allproducts',component:AllProductsComponent},
-            {path:'offers',component:OffersComponent}
+            {path:'offers',component:OffersComponent},
+            {path:'addproduct',component:AddproductComponent},
+            {path:'addoffer',component:AddofferComponent},
+            {path:'addbanner',component:AddbannerComponent}
         ]
     }
 ]

@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-all-products',
   standalone: true,
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   templateUrl: './all-products.component.html',
   styleUrl: './all-products.component.css'

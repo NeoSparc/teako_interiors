@@ -1,0 +1,150 @@
+<div class="container mx-auto px-4 py-8 ">
+    <form 
+      [formGroup]="productForm" 
+      (ngSubmit)="onSubmit()"
+      class="max-w-2xl mx-auto bg-white shadow-2xl rounded-lg p-8 "
+    >
+      <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">
+        Add New Product
+      </h2>
+
+      <!-- Product Name -->
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="productName">
+          Product Name
+        </label>
+        <input 
+          type="text" 
+          formControlName="productName"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Enter product name"
+        />
+        @if (productForm.get('productName')?.invalid && productForm.get('productName')?.touched) {
+          <p class="text-red-500 text-sm mt-1">Product name is required</p>
+        }
+      </div>
+
+      <!-- Category -->
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="category">
+          Category
+        </label>
+        <select 
+          formControlName="category"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="">Select Category</option>
+          <option value="electronics">Electronics</option>
+          <option value="clothing">Clothing</option>
+          <option value="furniture">Furniture</option>
+          <option value="books">Books</option>
+        </select>
+        @if (productForm.get('category')?.invalid && productForm.get('category')?.touched) {
+          <p class="text-red-500 text-sm mt-1">Category is required</p>
+        }
+      </div>
+
+      <!-- Dimensions -->
+      <div class="grid grid-cols-2 gap-4 mb-4">
+        <div>
+          <label class="block text-gray-700 font-bold mb-2" for="height">
+            Height (cm)
+          </label>
+          <input 
+            type="number" 
+            formControlName="height"
+            class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter height"
+          />
+        </div>
+        <div>
+          <label class="block text-gray-700 font-bold mb-2" for="width">
+            Width (cm)
+          </label>
+          <input 
+            type="number" 
+            formControlName="width"
+            class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter width"
+          />
+        </div>
+      </div>
+
+      <!-- Price and Availability -->
+      <div class="grid grid-cols-2 gap-4 mb-4">
+        <div>
+          <label class="block text-gray-700 font-bold mb-2" for="price">
+            Price
+          </label>
+          <input 
+            type="number" 
+            formControlName="price"
+            class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter price"
+          />
+        </div>
+        <div>
+          <label class="block text-gray-700 font-bold mb-2" for="availability">
+            Availability
+          </label>
+          <select 
+            formControlName="availability"
+            class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="description">
+          Description
+        </label>
+        <textarea 
+          formControlName="description"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          rows="4"
+          placeholder="Enter product description"
+        ></textarea>
+      </div>
+
+      <!-- Image Upload -->
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="image">
+          Product Image
+        </label>
+        <input 
+          type="file" 
+          (change)="onFileSelected($event)"
+          accept="image/*"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <!-- Image Preview -->
+      @if (imagePreview()) {
+        <div class="mb-4">
+          <h3 class="text-gray-700 font-bold mb-2">Image Preview</h3>
+          <img 
+            [src]="imagePreview()" 
+            alt="Product Preview" 
+            class="max-w-full h-64 object-cover rounded-lg mx-auto"
+          />
+        </div>
+      }
+
+      <!-- Submit Button -->
+      <div class="text-center">
+        <button 
+          type="submit"
+          [disabled]="productForm.invalid"
+          class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors 
+                 disabled:bg-gray-400 disabled:cursor-not-allowed"
+        >
+          Add Product
+        </button>
+      </div>
+    </form>
+  </div>

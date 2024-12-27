@@ -1,0 +1,73 @@
+<div class="container mx-auto px-4 py-8">
+    <form 
+      [formGroup]="adForm" 
+      (ngSubmit)="onSubmit()"
+      class="max-w-2xl mx-auto bg-white shadow-2xl rounded-lg p-8"
+    >
+      <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">
+        Create New banner
+      </h2>
+
+      
+      <!-- Image Upload -->
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="image">
+          Ad Image
+        </label>
+        <input 
+          type="file" 
+          (change)="onFileSelected($event)"
+          accept="image/*"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <!-- Image Preview -->
+      @if (imagePreview()) {
+        <div class="mb-4">
+          <h3 class="text-gray-700 font-bold mb-2">Image Preview</h3>
+          <div class="relative">
+            <img 
+              [src]="imagePreview()" 
+              alt="Ad Preview" 
+              class="max-w-full h-64 object-cover rounded-lg mx-auto"
+            />
+            <button 
+              type="button"
+              (click)="clearImage()"
+              class="absolute top-2 right-2 bg-red-500 text-white rounded-full p-2 hover:bg-red-600 transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      }
+
+      <!-- Description (Optional) -->
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="description">
+          Ad Description (Optional)
+        </label>
+        <textarea 
+          formControlName="description"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          rows="4"
+          placeholder="Enter ad description"
+        ></textarea>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="text-center">
+        <button 
+          type="submit"
+          [disabled]="adForm.invalid"
+          class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors 
+                 disabled:bg-gray-400 disabled:cursor-not-allowed"
+        >
+          Create new banner
+        </button>
+      </div>
+    </form>
+  </div>
