@@ -8,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrl: './carpender.component.css'
 })
 export class CarpenderComponent {
-  requestQuote(){}
+  requestQuote(){
+    const contactSection = document.getElementById('connect');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' ,block:'end' });
+    }
+    
+  }
 }

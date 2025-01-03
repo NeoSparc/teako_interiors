@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class AdminService {
+export class UserService {
   constructor(private http: HttpClient) {}
 
   baseUrl = environment.baseUrl;
@@ -29,5 +29,15 @@ export class AdminService {
   // Show All Products
   showAllProducts(): Observable<any> {
     return this.http.get(`${this.baseUrl}/user/products`);
+  }
+
+  // Get All Offers
+  getAllOffers(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/user/offers`);
+  }
+
+  // Get All Banners
+  getAllBanners(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/user/banners`);
   }
 }

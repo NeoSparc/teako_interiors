@@ -7,7 +7,7 @@ import { Observable } from "rxjs";
     providedIn:'root'
 })
 
-export class UserService {
+export class AdminService {
       constructor(private http: HttpClient) {}
     
       baseUrl = environment.baseUrl;

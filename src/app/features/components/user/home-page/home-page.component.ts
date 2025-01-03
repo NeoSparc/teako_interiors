@@ -46,5 +46,11 @@ export class HomePageComponent {
 
   requestQuote(){}
 
-  
+  gotoContact(){
+    const contactSection = document.getElementById('connect');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' ,block:'end' });
+    }
+    
+  }
 }

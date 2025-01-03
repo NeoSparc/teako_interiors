@@ -1,64 +1,49 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-bannerform',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    CommonModule
-  ],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './bannerform.component.html',
-  styleUrl: './bannerform.component.css'
+  styleUrl: './bannerform.component.css',
 })
 export class BannerformComponent {
-  // Signals
   imagePreview = signal<string | null>(null);
+  offerId:string = ''
+  bannerform: FormGroup;
 
-  // Ad Categories
-  adCategories: any = [
-    { value: 'electronics', label: 'Electronics' },
-    { value: 'fashion', label: 'Fashion' },
-    { value: 'home-decor', label: 'Home & Decor' },
-    { value: 'books', label: 'Books' },
-    { value: 'sports', label: 'Sports & Fitness' }
-  ];
-
-  // Reactive Form
-  adForm: FormGroup;
-
-  constructor(private fb: FormBuilder) {
-    this.adForm = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(3)]],
-      category: ['', Validators.required],
-      minOffer: [0, [Validators.required, Validators.min(0), Validators.max(100)]],
-      maxOffer: [0, [Validators.required, Validators.min(0), Validators.max(100)]],
+  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute) {
+    this.bannerform = this.fb.group({
       description: [''],
-      image: [null, Validators.required]
-    }, { validators: this.offerRangeValidator });
+      image: [null, Validators.required],
+    });
+
+    this.activatedRoute.params.subscribe((params) => {
+      if (params['id']) {
+        this.offerId = params['id']
+        this.bannerform.addControl(
+          'offerId',
+          this.fb.control(params['id'], Validators.required)
+        );
+      }
+    });
   }
 
-  // Custom validator to ensure max offer is greater than min offer
-  offerRangeValidator(group: FormGroup) {
-    const minOffer = group.get('minOffer')?.value;
-    const maxOffer = group.get('maxOffer')?.value;
-    
-    return minOffer <= maxOffer 
-      ? null 
-      : { offerRangeInvalid: true };
-  }
-
-  // File selection and preview
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       const file = input.files[0];
-      
-      // Set form control value
-      this.adForm.get('image')?.setValue(file);
 
-      // Create image preview
+      this.bannerform.get('image')?.setValue(file);
+
       const reader = new FileReader();
       reader.onload = () => {
         this.imagePreview.set(reader.result as string);
@@ -67,30 +52,25 @@ export class BannerformComponent {
     }
   }
 
-  // Clear image preview and form image value
   clearImage(): void {
     this.imagePreview.set(null);
-    this.adForm.get('image')?.setValue(null);
+    this.bannerform.get('image')?.setValue(null);
   }
 
-  // Form submission handler
   onSubmit(): void {
-    if (this.adForm.valid) {
-      // Prepare form data for submission
+    if (this.bannerform.valid) {
       const formData = new FormData();
-      Object.keys(this.adForm.controls).forEach(key => {
-        const control = this.adForm.get(key);
+      Object.keys(this.bannerform.controls).forEach((key) => {
+        const control = this.bannerform.get(key);
         if (control && control.value !== null) {
           formData.append(key, control.value);
         }
       });
 
-      console.log('Ad Form Submitted', formData);
-      // Here you would typically send the formData to your backend
+      console.log('Banner Form Submitted', formData);
     } else {
-      // Mark all fields as touched to show validation errors
-      Object.keys(this.adForm.controls).forEach(key => {
-        const control = this.adForm.get(key);
+      Object.keys(this.bannerform.controls).forEach((key) => {
+        const control = this.bannerform.get(key);
         if (control) {
           control.markAsTouched();
         }

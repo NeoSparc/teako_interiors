@@ -61,7 +61,6 @@ export class NavBarComponent implements OnInit {
 
   goToService(){
     this.router.navigate(['/aboutus']).then(() => {
-      // Scroll to the top of the page first
       window.scrollTo(0, 0);
       const serviceSection = document.getElementById('services');
       if (serviceSection) {
@@ -72,7 +71,7 @@ export class NavBarComponent implements OnInit {
 
   goToContactSection() {
     this.router.navigate(['/']).then(() => {
-      const contactSection = document.getElementById('footer');
+      const contactSection = document.getElementById('connect');
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: 'smooth' ,block:'end' });
     }
