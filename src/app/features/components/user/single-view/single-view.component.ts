@@ -1,53 +1,100 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from '../userService.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-single-view',
   standalone: true,
-  imports: [
-    CommonModule,
-  ],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './single-view.component.html',
-  styleUrl: './single-view.component.css'
+  styleUrl: './single-view.component.css',
 })
-export class SingleViewComponent {
-  product: any = {
-    id: 1,
-    name: 'Modern Leather Sofa',
-    price: 1299.99,
-    description: 'A sleek and comfortable leather sofa perfect for modern living spaces. Crafted with high-quality materials and designed for both style and comfort.',
-    length: 220,
-    width: 90,
-    height: 85,
-    availability: true,
-    imageUrl: '/images/pexels-algrey-3705539.jpg'
-  };
+export class SingleViewComponent implements OnInit {
+  contactForm: FormGroup;
+  formOpen: boolean = false;
+  productId: string = '';
+  product: any;
+  relatedProducts: any;
 
-  relatedProducts: any[] = [
-    {
-      id: 2,
-      name: 'Minimalist Armchair',
-      price: 599,
-      description: 'Compact armchair with clean lines',
-      availability: true,
-      imageUrl: '/images/pexels-algrey-3705539.jpg'
-    },
-    {
-      id: 3,
-      name: 'Wooden Coffee Table',
-      price: 349.99,
-      description: 'Elegant wooden coffee table',
-      availability: true,
-      imageUrl: '/images/pexels-algrey-3705539.jpg'
-    },
-    {
-      id: 4,
-      name: 'Modern Side Table',
-      price: 199.99,
-      description: 'Sleek side table for living room',
-      availability: false,
-      imageUrl: '/images/pexels-algrey-3705539.jpg'
+  constructor(
+    private fb: FormBuilder,
+    private ar: ActivatedRoute,
+    private userService: UserService,
+    private router:Router
+  ) {
+    this.contactForm = this.fb.group({
+      name: ['', [Validators.required]],
+      phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      email: ['', [Validators.email]],
+      place: ['', [Validators.required]],
+      id: [''],
+    });
+
+    this.ar.params.subscribe((params) => {
+      this.productId = params['id'];
+      if (this.productId) {
+        this.contactForm.patchValue({ id: this.productId });
+        this.getProduct();
+      }
+    });
+  }
+
+  showForm() {
+    this.formOpen = true;
+  }
+  closeModal() {
+    this.formOpen = false;
+  }
+
+  ngOnInit(): void {}
+
+  getProduct() {
+    this.userService.getSingleProduct(this.productId).subscribe((res) => {
+      this.product = res.data;
+      if (this.product) {
+        this.userService
+          .getAllRelatedProducts({ category: this.product.category })
+          .subscribe((res) => {
+            console.log(res);
+            this.relatedProducts = res.filter(
+              (pro:any) => pro._id !== this.product._id
+            );
+          });
+      }
+    });
+  }
+
+  goToSingle(id:string){
+    this.router.navigate(['/singleview/' + id])
+  }
+
+  onSubmit() {
+    if (this.contactForm.valid) {
+      console.log(this.contactForm.value);
+      this.userService.productCallBack(this.contactForm.value).subscribe((res)=>{
+        if(res.message == 'Callback request submitted successfully'){
+          this.formOpen = false
+          Swal.fire({
+            text: 'Your form is submitted.We will connect you shortly.',
+            icon: 'success',
+            timer: 3000,
+          });
+        }
+        
+      })
+    } else {
+      Object.keys(this.contactForm.controls).forEach((key) => {
+        const control = this.contactForm.get(key);
+        control?.markAsTouched();
+      });
     }
-  ];
-
+  }
 }

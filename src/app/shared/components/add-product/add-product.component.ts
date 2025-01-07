@@ -62,14 +62,22 @@ export class AddProductComponent {
   onSubmit(): void {
     if (this.productForm.valid) {
       const formData = new FormData();
+  
+      const availabilityValue = this.productForm.get('availability')?.value;
+      if (availabilityValue === 'Yes') {
+        this.productForm.get('availability')?.setValue(true);
+      } else if (availabilityValue === 'No') {
+        this.productForm.get('availability')?.setValue(false);
+      }
+  
       Object.keys(this.productForm.controls).forEach((key) => {
         const control = this.productForm.get(key);
         if (control) {
           formData.append(key, control.value);
         }
       });
-
-      this.proform.emit(formData)
+  
+      this.proform.emit(formData);
     } else {
       Object.keys(this.productForm.controls).forEach((key) => {
         const control = this.productForm.get(key);
@@ -79,4 +87,5 @@ export class AddProductComponent {
       });
     }
   }
+  
 }

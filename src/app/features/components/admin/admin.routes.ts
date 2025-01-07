@@ -21,5 +21,5 @@ export const AdminRoutes:Routes = [
             {path:'addoffer',component:AddofferComponent},
             {path:'addbanner',component:AddbannerComponent}
         ]
-    }
+    }   
 ]

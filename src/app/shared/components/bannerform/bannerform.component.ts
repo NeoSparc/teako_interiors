@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, EventEmitter, Output, signal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -19,6 +19,7 @@ export class BannerformComponent {
   imagePreview = signal<string | null>(null);
   offerId:string = ''
   bannerform: FormGroup;
+  @Output() bannerdata = new EventEmitter<any>()
 
   constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute) {
     this.bannerform = this.fb.group({
@@ -66,7 +67,7 @@ export class BannerformComponent {
           formData.append(key, control.value);
         }
       });
-
+      this.bannerdata.emit(formData)
       console.log('Banner Form Submitted', formData);
     } else {
       Object.keys(this.bannerform.controls).forEach((key) => {

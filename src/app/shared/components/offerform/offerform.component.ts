@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, signal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -19,6 +19,7 @@ export class OfferformComponent implements OnInit {
   imagePreview = signal<string | null>(null);
   offerId:string = ''
   adForm: FormGroup;
+  @Output() offerData = new EventEmitter<any>()
 
   constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute) {
     this.adForm = this.fb.group(
@@ -85,7 +86,7 @@ export class OfferformComponent implements OnInit {
           formData.append(key, control.value);
         }
       });
-
+      this.offerData.emit(formData)
       console.log('Ad Form Submitted', formData);
     } else {
       Object.keys(this.adForm.controls).forEach((key) => {

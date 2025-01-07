@@ -33,11 +33,14 @@
           formControlName="category"
           class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
-          <option value="">Select Category</option>
-          <option value="electronics">Electronics</option>
-          <option value="clothing">Clothing</option>
-          <option value="furniture">Furniture</option>
-          <option value="books">Books</option>
+        <option value="">Select Category</option>
+        <option value="All">All</option>
+        <option value="Doors">Doors</option>
+        <option value="Windows">Windows</option>
+        <option value="Sofas">Sofas</option>
+        <option value="Curtain">Curtain</option>
+        <option value="Dining set">Dining set</option>
+        <option value="Tv unit">Tv unit</option>
         </select>
         @if (productForm.get('category')?.invalid && productForm.get('category')?.touched) {
           <p class="text-red-500 text-sm mt-1">Category is required</p>

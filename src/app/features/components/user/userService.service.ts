@@ -27,8 +27,8 @@ export class UserService {
   }
 
   // Show All Products
-  showAllProducts(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/user/products`);
+  showAllProducts(data:{searchIndex:string , selectedCategory:string }): Observable<any> {
+    return this.http.post(`${this.baseUrl}/user/products` , data);
   }
 
   // Get All Offers
@@ -40,4 +40,10 @@ export class UserService {
   getAllBanners(): Observable<any> {
     return this.http.get(`${this.baseUrl}/user/banners`);
   }
-}
+
+  // get all related products
+  getAllRelatedProducts(data:{category:string  }): Observable<any> {
+    return this.http.post(`${this.baseUrl}/user/relatedProducts` , data);
+  }
+} 
+

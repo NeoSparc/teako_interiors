@@ -7,6 +7,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { UserService } from '../../userService.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-connect',
@@ -28,7 +29,7 @@ export class ConnectComponent {
         '',
         [Validators.required, Validators.pattern('^[0-9]{10}$')],
       ],
-      email: ['', [Validators.email,Validators.required]],
+      email: ['', [Validators.email, Validators.required]],
       place: ['', Validators.required],
       category: ['', Validators.required],
     });
@@ -38,7 +39,12 @@ export class ConnectComponent {
     if (this.connectForm.valid) {
       this.userService.connectWithUs(this.connectForm.value).subscribe({
         next: (response) => {
-          this.connectForm.reset()
+          Swal.fire({
+            text: 'Your form is submitted.We will connect you shortly.',
+            icon: 'success',
+            timer: 3000,
+          });
+          this.connectForm.reset();
         },
         error: (error) => {},
       });
