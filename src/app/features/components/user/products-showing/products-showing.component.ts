@@ -48,10 +48,6 @@ export class ProductsShowingComponent implements OnInit {
     });
   }
 
-  setActiveCategory(category: string) {
-    this.activeCategory.set(category);
-  }
-
   handleImageError(event: Event) {
     const img = event.target as HTMLImageElement;
     img.src = `https://via.placeholder.com/400x300?text=${encodeURIComponent(

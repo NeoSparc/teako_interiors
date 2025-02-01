@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../../../features/components/user/userService.service';
 
 @Component({
   selector: 'app-add-product',
@@ -21,11 +22,11 @@ export class AddProductComponent {
   imagePreview = signal<string | null>(null);
   @Output() proform = new EventEmitter<any>()
 
-  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute , private userService:UserService) {
     this.productForm = this.fb.group({
       productName: ['', [Validators.required]],
       category: ['', [Validators.required]],
-      height: ['', [Validators.min(0)]],
+      length: ['', [Validators.min(0)]],
       width: ['', [Validators.min(0)]],
       price: ['', [Validators.required, Validators.min(0)]],
       availability: [true, Validators.required],
@@ -40,6 +41,13 @@ export class AddProductComponent {
           'productId',
           this.fb.control(params['id'], Validators.required)
         );
+      }
+      if(this.productId){
+        userService.getSingleProduct(this.productId).subscribe((res)=>{
+          console.log(res);
+          this.productForm.patchValue(res.data)
+          this.imagePreview.set(res.data.image)
+        })
       }
     });
   }

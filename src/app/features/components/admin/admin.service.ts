@@ -30,8 +30,8 @@ export class AdminService {
     return this.http.put(`${this.baseUrl}/admin/product`, data);
   }
 
-  deleteProduct(data: any): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/admin/product`, data);
+  deleteProduct(data: any): Observable<any> {    
+    return this.http.delete(`${this.baseUrl}/admin/product/`+ data);
   }
 
   getSingleProduct(productId: string): Observable<any> {
