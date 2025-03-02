@@ -13,7 +13,7 @@ import { EditProductComponent } from './edit-product/edit-product.component';
 
 export const AdminRoutes: Routes = [
   {
-    path: 'landpage',
+    path: '',
     component: LandingPageComponent,
     children: [
       { path: 'dashbord', component: DashbordComponent },

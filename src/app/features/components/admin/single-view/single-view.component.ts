@@ -40,7 +40,7 @@ export class SingleViewComponent implements OnInit {
   }
 
   onEdit() {
-    this.router.navigate(['/admin/landpage/editProduct/', this.product._id]);
+    this.router.navigate(['/admin/editProduct/', this.product._id]);
   }
 
   onDelete() {
@@ -55,7 +55,7 @@ export class SingleViewComponent implements OnInit {
     this.adminService.deleteProduct(id).subscribe((res)=>{
       this.showDeleteModal = false;
 
-      this.router.navigate(['/admin/landpage/allproducts']);
+      this.router.navigate(['/admin/allproducts']);
     })
   }
 }

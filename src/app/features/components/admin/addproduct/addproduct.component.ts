@@ -24,7 +24,7 @@ export class AddproductComponent {
   this.loadingStatus = true
   this.adminService.addNewProduct(data).subscribe((res)=>{
     this.loadingStatus  = false
-    this.router.navigate(['/admin/landpage/allproducts'])
+    this.router.navigate(['/admin/allproducts'])
   })
   
  }

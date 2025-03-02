@@ -1,20 +1,6 @@
 <section class="">
     <div class="max-w-7xl mx-auto">
 
-      <!-- Category Filter -->
-      <!-- <div class="flex flex-wrap justify-center gap-4 mb-8">
-        <button
-          *ngFor="let category of categories"
-          (click)="setActiveCategory(category)"
-          [class.bg-amber-600]="activeCategory() === category"
-          [class.text-white]="activeCategory() === category"
-          [class.bg-white]="activeCategory() !== category"
-          class="px-6 py-2 rounded-full shadow-md hover:shadow-lg transition-all duration-300 text-sm font-medium ring-1"
-        >
-          {{ category }}
-        </button>
-      </div> -->
-
 
 <form class="max-w-lg mx-auto mb-8">
   <div class="flex">
@@ -86,10 +72,23 @@
   </section>
 
   <button 
-  routerLink="/admin/landpage/addproduct"
+  routerLink="/admin/addproduct"
   class="fixed bottom-6 right-6 bg-[#F89F1F] text-white p-4 rounded-full shadow-2xl hover:bg-green-600 transition-all duration-300 z-50 flex items-center justify-center"
 >
   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
   </svg>
 </button>
+
+<section *ngIf="products.length === 0" class="flex justify-center items-center min-h-[50vh] sm:min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh]">
+  <div class="p-8 text-center max-w-md w-full">
+    <div class="mb-6">
+      <img src="/images/cat.png" alt="Product Not Found" class="mx-auto w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 rounded-full">
+    </div>
+    
+    <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4">Product Not Found</h1>
+    <p class="text-gray-600 text-sm sm:text-base md:text-lg mb-6">
+      We're sorry, but the product you're looking for doesn't exist or check your prompt.
+    </p>
+  </div>
+</section>

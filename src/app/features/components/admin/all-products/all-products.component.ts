@@ -3,6 +3,8 @@ import { Component, OnInit, signal } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { UserService } from '../../user/userService.service';
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-all-products',
@@ -13,9 +15,10 @@ import { FormsModule } from '@angular/forms';
 })
 export class AllProductsComponent implements OnInit {
   constructor(private router: Router, private userService: UserService) {}
-  products: any;
+  products: any = []
   searchIndex: string = '';
   selectedCategory: string = 'All';
+  notfount:Boolean= false
 
   categories = [
     'All',
@@ -37,9 +40,19 @@ export class AllProductsComponent implements OnInit {
       selectedCategory: this.selectedCategory,
     };
 
-    this.userService.showAllProducts(data).subscribe((res) => {
-      this.products = res.data;
+    this.userService.showAllProducts(data).subscribe({
+      next: (res) => {
+        this.products = res.data;
+      },
+      error: (err) => {
+        if (err.status === 404) {
+          this.products = []
+        } else if (err.status === 500) {
+          alert('Server error, please try again later');
+        }
+      }
     });
+    
   }
 
   handleImageError(event: Event) {
@@ -52,6 +65,6 @@ export class AllProductsComponent implements OnInit {
   goToSingle(id: string) {
     console.log(id);
 
-    this.router.navigate(['/admin/landpage/singleView/', id]);
+    this.router.navigate(['/admin/singleView/', id]);
   }
 }
