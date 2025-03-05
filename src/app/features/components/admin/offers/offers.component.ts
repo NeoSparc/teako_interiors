@@ -1,6 +1,9 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { AdminService } from '../admin.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-offers',
@@ -9,69 +12,58 @@ import { RouterModule } from '@angular/router';
   templateUrl: './offers.component.html',
   styleUrl: './offers.component.css',
 })
-export class OffersComponent {
-  advertisements = signal<any[]>([
-    {
-      id: 1,
-      productImage: 'https://via.placeholder.com/300x200',
-      offerRange: '60-70%',
-      mainTitle: 'Summer Sale Extravaganza',
-      secondaryText: 'Incredible Discounts on Latest Fashion',
-    },
-    {
-      id: 2,
-      productImage: 'https://via.placeholder.com/300x200',
-      offerRange: '50-60%',
-      mainTitle: 'Electronics Bonanza',
-      secondaryText: 'Unbeatable Deals on Tech Gadgets',
-    },
-    {
-      id: 1,
-      productImage: 'https://via.placeholder.com/300x200',
-      offerRange: '60-70%',
-      mainTitle: 'Summer Sale Extravaganza',
-      secondaryText: 'Incredible Discounts on Latest Fashion',
-    },
-    {
-      id: 2,
-      productImage: 'https://via.placeholder.com/300x200',
-      offerRange: '50-60%',
-      mainTitle: 'Electronics Bonanza',
-      secondaryText: 'Unbeatable Deals on Tech Gadgets',
-    },
-    {
-      id: 1,
-      productImage: 'https://via.placeholder.com/300x200',
-      offerRange: '60-70%',
-      mainTitle: 'Summer Sale Extravaganza',
-      secondaryText: 'Incredible Discounts on Latest Fashion',
-    },
-    {
-      id: 2,
-      productImage: 'https://via.placeholder.com/300x200',
-      offerRange: '50-60%',
-      mainTitle: 'Electronics Bonanza',
-      secondaryText: 'Unbeatable Deals on Tech Gadgets',
-    },
-    {
-      id: 1,
-      productImage: 'https://via.placeholder.com/300x200',
-      offerRange: '60-70%',
-      mainTitle: 'Summer Sale Extravaganza',
-      secondaryText: 'Incredible Discounts on Latest Fashion',
-    },
-    {
-      id: 2,
-      productImage: 'https://via.placeholder.com/300x200',
-      offerRange: '50-60%',
-      mainTitle: 'Electronics Bonanza',
-      secondaryText: 'Unbeatable Deals on Tech Gadgets',
-    },
-  ]);
+export class OffersComponent implements OnInit {
+  constructor(private adminService: AdminService, private router: Router) {}
+  offers = signal<any[]>([]);
+  loadingStatus:boolean= false
+  ngOnInit(): void {
+    this.adminService.getAllOffers().subscribe({
+      next: (res) => {
+        this.offers.set(res.data);
+      },
+      error: (err) => {},
+    });
+  }
 
-  editAd(ad: any): void {}
+  editAd(id: any): void {
+    console.log(id);
+    this.router.navigate(['/admin/editoffer/',  id])
+    
+  }
 
-  deleteAd(adId: number): void {}
+  deleteAd(id: string): void {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.loadingStatus = true;
+        this.adminService.deleteOffer(id).subscribe({
+          next: (res) => {
+            this.loadingStatus = false;
+            Swal.fire(
+              'Deleted!',
+              'The offer has been deleted successfully.',
+              'success'
+            );
+            this.ngOnInit();
+          },
+          error: (err) => {
+            this.loadingStatus = false;
+            Swal.fire(
+              'Error!',
+              'Failed to delete the offer. Please try again.',
+              'error'
+            );
+          }
+        });
+      }
+    });
+  }
 
-  openAddAdDialog(): void {}
 }

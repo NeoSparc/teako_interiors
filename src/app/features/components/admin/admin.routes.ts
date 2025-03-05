@@ -10,6 +10,7 @@ import { AddofferComponent } from './addoffer/addoffer.component';
 import { AddbannerComponent } from './addbanner/addbanner.component';
 import { SingleViewComponent } from './single-view/single-view.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
+import { EditOfferComponent } from './edit-offer/edit-offer.component';
 
 export const AdminRoutes: Routes = [
   {
@@ -25,7 +26,8 @@ export const AdminRoutes: Routes = [
       { path: 'addoffer', component: AddofferComponent },
       { path: 'addbanner', component: AddbannerComponent },
       { path: 'singleView/:id', component: SingleViewComponent },
-      {path:'editProduct/:id',component:EditProductComponent}
+      {path:'editProduct/:id',component:EditProductComponent},
+      {path:'editoffer/:id',component:EditOfferComponent}
     ],
   },
 ];

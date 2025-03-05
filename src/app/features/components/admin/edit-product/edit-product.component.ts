@@ -3,6 +3,8 @@ import { AddProductComponent } from '../../../../shared/components/add-product/a
 import { AdminService } from '../admin.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-edit-product',
@@ -21,11 +23,32 @@ export class EditProductComponent {
 
   editData(data:any){
     this.loadingStatus = true
-    this.adminService.editProduct(data).subscribe((res)=>{
-      this.loadingStatus = false
-      console.log(res);
-      this.router.navigate(['/admin/allproducts'])
-      
-    })
+    this.adminService.editProduct(data).subscribe({
+      next: (res) => {
+        this.loadingStatus = false;
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'Product updated successfully!',
+        }).then(() => {
+          this.router.navigate(['/admin/allproducts']);
+        });
+      },
+      error: (err) => {
+        this.loadingStatus = false;
+        let errorMessage = 'Something went wrong. Please try again.';
+    
+        if (err.error && err.error.message) {
+          errorMessage = err.error.message; // Use backend error message
+        }
+    
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: errorMessage,
+        });
+      }
+    });
+    
   }
 }

@@ -12,56 +12,94 @@ export class AdminService {
     
       baseUrl = environment.baseUrl;
 
-      // Users
-  getAllUsersList(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/admin/users`);
-  }
+   // Users
+/** Fetch all users */
+getAllUsersList(): Observable<any> {
+  return this.http.get(`${this.baseUrl}/admin/users`);
+}
 
-  getUsersWithProduct(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/admin/users-with-product`);
-  }
+/** Fetch all users along with their products */
+getUsersWithProduct(): Observable<any> {
+  return this.http.get(`${this.baseUrl}/admin/users-with-product`);
+}
 
-  // Products
-  addNewProduct(data: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/admin/product`, data);
-  }
+/** Fetch dashboard data (users and products) */
+getAllUsersAndProducts(): Observable<any> {
+  return this.http.get(`${this.baseUrl}/admin/dashdata`);
+}
 
-  editProduct(data: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/admin/product`, data);
-  }
+// Products
+/** Add a new product */
+addNewProduct(data: any): Observable<any> {
+  return this.http.post(`${this.baseUrl}/admin/product`, data);
+}
 
-  deleteProduct(data: any): Observable<any> {    
-    return this.http.delete(`${this.baseUrl}/admin/product/`+ data);
-  }
+/** Edit an existing product */
+editProduct(data: any): Observable<any> {
+  return this.http.put(`${this.baseUrl}/admin/product`, data);
+}
 
-  getSingleProduct(productId: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/admin/product/${productId}`);
-  }
+/** Delete a product by ID */
+deleteProduct(data: any): Observable<any> {    
+  return this.http.delete(`${this.baseUrl}/admin/product/` + data);
+}
 
-  // Banners
-  addBanner(data: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/admin/banner`, data);
-  }
+/** Fetch a single product by ID */
+getSingleProduct(productId: string): Observable<any> {
+  return this.http.get(`${this.baseUrl}/admin/product/${productId}`);
+}
 
-  editBanner(data: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/admin/banner`, data);
-  }
+// Banners
+/** Fetch all banners */
+getAllBanners(): Observable<any> {
+  return this.http.get(`${this.baseUrl}/admin/banner`);
+}
 
-  deleteBanner(data: any): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/admin/banner`, data);
-  }
+/** Fetch a single banner by ID */
+getSingleBanner(data: any): Observable<any> {
+  return this.http.post(`${this.baseUrl}/admin/getSinglebanner`, data);
+}
 
-  // Offers
-  createOffer(data: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/admin/offer`, data);
-  }
+/** Add a new banner */
+addBanner(data: any): Observable<any> {
+  return this.http.post(`${this.baseUrl}/admin/banner`, data);
+}
 
-  editOffer(data: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/admin/offer`, data);
-  }
+/** Edit an existing banner */
+editBanner(data: any): Observable<any> {
+  return this.http.put(`${this.baseUrl}/admin/banner`, data);
+}
 
-  deleteOffer(data: any): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/admin/offer`, data);
-  }
+/** Delete a banner by ID */
+deleteBanner(data: any): Observable<any> {
+  return this.http.delete(`${this.baseUrl}/admin/banner/` + data);
+}
+
+// Offers
+/** Fetch all offers */
+getAllOffers(): Observable<any> {
+  return this.http.get(`${this.baseUrl}/admin/offer`);
+}
+
+/** Fetch a single offer by ID */
+getSingleOffer(data: any): Observable<any> {
+  return this.http.post(`${this.baseUrl}/admin/getOffer`, data);
+}
+
+/** Create a new offer */
+createOffer(data: any): Observable<any> {
+  return this.http.post(`${this.baseUrl}/admin/offer`, data);
+}
+
+/** Edit an existing offer */
+editOffer(data: any): Observable<any> {
+  return this.http.put(`${this.baseUrl}/admin/offer`, data);
+}
+
+/** Delete an offer by ID */
+deleteOffer(data: any): Observable<any> {
+  return this.http.delete(`${this.baseUrl}/admin/offer/` + data);
+}
+
     
 }

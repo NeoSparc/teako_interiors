@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { AdminService } from '../../../features/components/admin/admin.service';
 
 @Component({
   selector: 'app-offerform',
@@ -21,15 +22,15 @@ export class OfferformComponent implements OnInit {
   adForm: FormGroup;
   @Output() offerData = new EventEmitter<any>()
 
-  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute , private adminService:AdminService) {
     this.adForm = this.fb.group(
       {
         minOffer: [
-          0,
+          '',
           [Validators.required, Validators.min(0), Validators.max(100)],
         ],
         maxOffer: [
-          0,
+          '',
           [Validators.required, Validators.min(0), Validators.max(100)],
         ],
         image: [null, Validators.required],
@@ -48,7 +49,14 @@ export class OfferformComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if(this.offerId){
+      this.adminService.getSingleOffer({offerId:this.offerId}).subscribe((res)=>{
+        this.adForm.patchValue(res.data)
+        this.imagePreview.set(res.data.image)
+      })
+    }
+  }
 
   offerRangeValidator(group: FormGroup) {
     const minOffer = group.get('minOffer')?.value;

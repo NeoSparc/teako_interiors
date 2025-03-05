@@ -3,6 +3,7 @@ import { OfferformComponent } from '../../../../shared/components/offerform/offe
 import { CommonModule } from '@angular/common';
 import { AdminService } from '../admin.service';
 import { log } from 'node:console';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-addoffer',
@@ -12,15 +13,15 @@ import { log } from 'node:console';
   styleUrl: './addoffer.component.css',
 })
 export class AddofferComponent {
-  constructor(private adminService: AdminService) {}
+  constructor(private adminService: AdminService , private router:Router) {}
 
   loadingStatus: boolean = false;
 
   offerData(data: any) {
     this.loadingStatus = true;
     this.adminService.createOffer(data).subscribe((res) => {
-      console.log(res);
       this.loadingStatus = false;
+      this.router.navigate(['/admin/offers'])
     });
   }
 }
